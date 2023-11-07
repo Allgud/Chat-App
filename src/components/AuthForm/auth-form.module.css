@@ -1,0 +1,129 @@
+.form__wrapper {
+  width: 400px;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  padding: 20px;
+  background-color: #ffffff;
+  border-radius: 10px;
+}
+
+.form__title {
+  width: 100%;
+  font-size: 24px;
+  line-height: 30px;
+  color: var(--button-background);
+  text-align: center;
+}
+
+.form__mode {
+  width: 100%;
+  text-transform: capitalize;
+  text-align: center;
+  font-size: 14px;
+  line-height: 22px;
+  color: var(--primary-background);
+  opacity: 0.8;
+}
+
+.form__form {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+}
+
+.form__input {
+  width: 100%;
+  height: 40px;
+  border: 1px solid;
+  border-color: #c1c1c1;
+  border-radius: 5px;
+  outline: none;
+  padding: 0px 10px;
+  background-color: transparent;
+  color: rgba(0, 0, 0, .85);
+}
+
+.form__input:focus {
+  border-color: var(--button-background);
+}
+
+.input__label {
+  font-size: 12px;
+  line-height: 16px;
+  color: #c1c1c1;
+}
+
+.form__button {
+  height: 40px;
+  border-radius: 5px;
+  border: none;
+  outline: none;
+  background-color: var(--button-background);
+  color: var(--primary-color);
+  text-transform: capitalize;
+  font-weight: 600;
+  transition: all 0.2s ease;
+}
+
+.form__button:hover {
+  background-color: #535bf2;
+  transition: all 0.2s ease;
+}
+
+.form__switch,
+.switch__link {
+  font-size: 14px;
+  line-height: 19px;
+  color: var(--primary-background);
+  opacity: 0.8;
+  text-align: center;
+}
+
+.switch__link {
+  color: var(--button-background);
+}
+
+.switch__link:hover {
+  text-decoration: underline;
+  transition: all 0.5s ease;
+  cursor: pointer;
+}
+
+.file__label {
+  width: 100%;
+  height: 48px;
+  position: relative;
+  font-size: 12px;
+  line-height: 16px;
+  color: #c1c1c1;
+  display: flex;
+  align-items: center;
+  padding-left: 50px;
+  cursor: pointer;
+}
+
+.file__label span {
+  color: var(--button-background);
+}
+
+.file__label span:hover {
+  color: #535bf2;
+  transition: all 0.3s ease;
+}
+
+.file__input {
+  width: 0;
+  height: 0;
+  opacity: 0;
+  z-index: -1;
+}
+
+.file__icon {
+  width: 40px;
+  height: 40px;
+  fill: var(--button-background);
+  position: absolute;
+  left: 0;
+}
