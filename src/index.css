@@ -35,3 +35,17 @@ a:hover {
 button {
   cursor: pointer;
 }
+
+.screen__wrapper {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.user__picture {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+}

@@ -1,0 +1,7 @@
+.window__wrapper {
+  width: 800px;
+  height: 600px;
+  border-radius: 10px;
+  overflow: hidden;
+  display: flex;
+}
