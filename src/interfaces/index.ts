@@ -4,12 +4,18 @@ export type AuthFormProps = {
 };
 
 export type SearchProps = {
-  value: string,
-  onChange: (arg1: string) => void
-}
+  value: string;
+  onChange: (arg1: string) => void;
+};
 
 export type ContactProps = {
-  avatar?: string,
-  username: string,
-  lastMessage: string
-}
+  avatar?: string;
+  username: string;
+  lastMessage: string;
+};
+
+export type ChatProps = {
+  avatar?: string;
+  username: string;
+  messages?: string[];
+};

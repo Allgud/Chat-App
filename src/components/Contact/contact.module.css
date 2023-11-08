@@ -6,6 +6,10 @@
   align-items: center;
 }
 
+.selected {
+  background-color: #2f2d52;
+}
+
 .contact__info {
   flex-grow: 1;
   display: flex;

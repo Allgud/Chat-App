@@ -3,6 +3,7 @@
   height: 40px;
   background-color: #3e3c61;
   border-bottom: 1px solid #c1c1c1;
+  position: relative;
 }
 
 .search__input {
@@ -19,6 +20,20 @@
 .search__input::placeholder {
   font-size: 14px;
   color: #c1c1c1;
-  background: url('../../assets/search.svg') no-repeat;
+  background: url("../../assets/search.svg") no-repeat;
   padding-left: 22px;
+}
+
+.search__clear {
+  width: 12px;
+  height: 12px;
+  position: absolute;
+  top: 50%;
+  right: 10px;
+  transform: translateY(-50%);
+  stroke: #c1c1c1;
+}
+
+.search__clear:hover {
+  cursor: pointer;
 }
