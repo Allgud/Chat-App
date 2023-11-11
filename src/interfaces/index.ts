@@ -19,3 +19,7 @@ export type ChatProps = {
   username: string;
   messages?: string[];
 };
+
+export type MessageProps = {
+  author: string
+}

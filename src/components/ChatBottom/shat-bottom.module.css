@@ -1,0 +1,55 @@
+.chat__footer {
+  width: 100%;
+  height: 60px;
+  background-color: #ffffff;
+  display: flex;
+  align-items: center;
+  gap: 20px;
+}
+
+.footer__input {
+  width: 70%;
+  height: 100%;
+  border: none;
+  outline: none;
+  padding: 10px 15px;
+  font-size: 16px;
+  color: var(--primary-background);
+  background-color: #ffffff;
+}
+
+.footer__input::placeholder {
+  color: #c1c1c1;
+}
+
+.footer__file {
+  width: 0;
+  height: 0;
+  opacity: 0;
+  z-index: -1;
+}
+
+.file__label {
+  position: relative;
+}
+
+.clip__icon {
+  width: 24px;
+  height: 24px;
+  stroke: var(--button-background);
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%) rotate(-45deg);
+}
+
+.footer__button {
+  width: 20%;
+  height: 36px;
+  background-color: var(--button-background);
+  color: #ffffff;
+  outline: none;
+  border: none;
+  border-bottom-right-radius: 10px;
+  font-size: 14px;
+}

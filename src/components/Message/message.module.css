@@ -1,0 +1,48 @@
+.message__wrapper {
+  background: transparent;
+  display: inline-flex;
+  padding: 10px;
+  gap: 10px;
+}
+
+.message__info {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  position: relative;
+}
+
+.message__author {
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+}
+
+.message__timestamp {
+  white-space: nowrap;
+  font-size: 10px;
+  font-weight: 400;
+  color: #c1c1c1;
+  position: absolute;
+  bottom: -26px;
+  left: 0;
+}
+
+.message__body {
+  width: 75%;
+  padding: 5px 10px;
+  font-size: 14px;
+  font-weight: 500;
+  line-height: 19px;
+  border-radius: 10px;
+  border-top-left-radius: 0px;
+}
+
+.message__received {
+  background-color: #ffffff;
+  color: var(--primary-background);
+}
+
+.message__sended {
+  background-color: var(--button-background);
+}
