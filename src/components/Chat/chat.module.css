@@ -36,9 +36,9 @@
   gap: 12px;
 }
 
-right__icon {
-  width: 16px;
-  height: 16px;
+.right__icon {
+  width: 20px;
+  height: 20px;
   stroke: #c1c1c1;
 }
 
@@ -49,24 +49,4 @@ right__icon {
 .chat__content {
   flex-grow: 1;
   background-color: #ddddf7;
-}
-
-.chat__footer {
-  width: 100%;
-  height: 60px;
-  background-color: #ffffff;
-}
-
-.footer__input {
-  width: 70%;
-  height: 100%;
-  border: none;
-  outline: none;
-  padding: 10px 15px;
-  font-size: 16px;
-  color: var(--primary-background);
-}
-
-.footer__input::placeholder {
-  color: #c1c1c1;
 }
