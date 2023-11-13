@@ -3,9 +3,17 @@ import { useAuthForm } from "../../hooks/useAuthForm";
 import { AuthFormProps } from "../../interfaces";
 import { MdOutlineAddPhotoAlternate } from "react-icons/md";
 import { Modes } from "../../constants";
+import { createUser } from "../../store/slices/authSlice";
+import { useAppDispatch } from "../../store/hooks/index";
 
 const AuthForm = ({ mode, handleMode }: AuthFormProps) => {
   const { name, email, password, handleChange } = useAuthForm();
+  const dispatch = useAppDispatch();
+
+  const handleSubmit = (evt: SubmitEvent) => {
+    evt.preventDefault();
+    dispatch(createUser({ email, password }));
+  };
 
   return (
     <div className={styles.form__wrapper}>
@@ -13,7 +21,7 @@ const AuthForm = ({ mode, handleMode }: AuthFormProps) => {
       <h6 className={styles.form__mode}>
         {mode === "login" ? "Вход" : "Регистрация"}
       </h6>
-      <form className={styles.form__form}>
+      <form className={styles.form__form} onSubmit={(evt) => handleSubmit(evt)}>
         {mode !== Modes.LOGIN && (
           <label htmlFor="display-name" className={styles.input__label}>
             Имя

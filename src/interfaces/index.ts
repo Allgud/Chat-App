@@ -21,5 +21,12 @@ export type ChatProps = {
 };
 
 export type MessageProps = {
-  author: string
-}
+  author: string;
+};
+
+export type UserProps = {
+  displayName?: string;
+  email: string;
+  password: string;
+  avatar?: File;
+};

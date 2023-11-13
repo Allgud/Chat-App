@@ -1,4 +1,4 @@
-пше .chat__wrapper {
+.chat__wrapper {
   width: 67%;
   display: flex;
   flex-direction: column;
@@ -44,9 +44,4 @@
 
 .right__icon:hover {
   cursor: pointer;
-}
-
-.chat__content {
-  flex-grow: 1;
-  background-color: #ddddf7;
 }

@@ -1,7 +1,7 @@
 import styles from "./chat.module.css";
 import ChatBottom from "../ChatBottom";
 import { ChatProps } from "../../interfaces/index";
-import Message from "../Message";
+import Messages from "../Messages";
 import NoPhoto from "../../assets/no_photo.png";
 import {
   HiOutlineVideoCamera,
@@ -30,9 +30,7 @@ const Chat = ({ avatar, username }: ChatProps) => {
           <HiDotsVertical className={styles.right__icon} title="Настройки" />
         </div>
       </div>
-      <div className={styles.chat__content}>
-        <Message author="Tyler" />
-      </div>
+      <Messages />
       <ChatBottom />
     </div>
   );

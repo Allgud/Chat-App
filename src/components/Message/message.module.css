@@ -5,11 +5,15 @@
   gap: 10px;
 }
 
+.reversed__wrapper {
+  flex-direction: row-reverse;
+}
+
 .message__info {
   display: flex;
   flex-direction: column;
+  justify-content: space-between;
   gap: 4px;
-  position: relative;
 }
 
 .message__author {
@@ -23,9 +27,6 @@
   font-size: 10px;
   font-weight: 400;
   color: #c1c1c1;
-  position: absolute;
-  bottom: -26px;
-  left: 0;
 }
 
 .message__body {
@@ -45,4 +46,6 @@
 
 .message__sended {
   background-color: var(--button-background);
+  border-top-left-radius: 10px;
+  border-top-right-radius: 0;
 }
