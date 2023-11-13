@@ -5,14 +5,15 @@ import { MdOutlineAddPhotoAlternate } from "react-icons/md";
 import { Modes } from "../../constants";
 import { createUser } from "../../store/slices/authSlice";
 import { useAppDispatch } from "../../store/hooks/index";
+import { SyntheticEvent } from "react";
 
 const AuthForm = ({ mode, handleMode }: AuthFormProps) => {
-  const { name, email, password, handleChange } = useAuthForm();
+  const { displayName, email, password, handleChange, avatar, addAvatar } = useAuthForm();
   const dispatch = useAppDispatch();
 
-  const handleSubmit = (evt: SubmitEvent) => {
+  const handleSubmit = (evt: SyntheticEvent) => {
     evt.preventDefault();
-    dispatch(createUser({ email, password }));
+    dispatch(createUser({ displayName, email, password, avatar }));
   };
 
   return (
@@ -30,7 +31,7 @@ const AuthForm = ({ mode, handleMode }: AuthFormProps) => {
               className={styles.form__input}
               name="display-name"
               id="display-name"
-              value={name}
+              value={displayName}
               onChange={(evt) => handleChange(evt)}
             />
           </label>
@@ -67,6 +68,7 @@ const AuthForm = ({ mode, handleMode }: AuthFormProps) => {
               className={styles.file__input}
               name="avatar"
               id="avatar"
+              onChange={(evt) => addAvatar(evt)}
             />
             <MdOutlineAddPhotoAlternate className={styles.file__icon} />
           </label>
@@ -80,7 +82,7 @@ const AuthForm = ({ mode, handleMode }: AuthFormProps) => {
           Нет аккаунта?{" "}
           <span
             className={styles.switch__link}
-            onClick={() => handleMode("signup")}
+            onClick={() => handleMode(Modes.SIGNUP)}
           >
             Регистрация
           </span>
@@ -90,7 +92,7 @@ const AuthForm = ({ mode, handleMode }: AuthFormProps) => {
           Уже есть аккаунт.{" "}
           <span
             className={styles.switch__link}
-            onClick={() => handleMode("login")}
+            onClick={() => handleMode(Modes.LOGIN)}
           >
             Вход
           </span>

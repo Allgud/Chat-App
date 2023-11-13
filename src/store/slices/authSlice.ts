@@ -1,9 +1,9 @@
-import { createSlice, createAsyncThunk, PayloadAction } from "@reduxjs/toolkit";
+import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
 import { createUserWithEmailAndPassword, updateProfile } from "firebase/auth";
 import { auth, storage, db } from "../../firebase";
 import { UserProps } from "../../interfaces";
-import { ref, uploadBytesResumable, getDownloadURL } from "firebase/storage";
-import { doc, setDoc } from "firebase/firestore";
+import { ref, uploadBytesResumable, getDownloadURL, StorageError } from "firebase/storage";
+import { doc, setDoc } from 'firebase/firestore'
 
 interface IAuthState {
   isAuth: boolean;
@@ -18,26 +18,27 @@ export const createUser = createAsyncThunk(
         data.email,
         data.password,
       );
-      const storageRef = ref(storage, data.displayName);
-      const uploadTask = uploadBytesResumable(storage, data.avatar);
-      uploadTask.on(
-        (err) => console.log(err),
+      const storageRef = ref(storage, data.displayName)
+      const uploadTask = uploadBytesResumable(storageRef, data.avatar)
+      uploadTask.on("state_changed",
+        (snapShot) => console.log(snapShot),
+        (err: StorageError) => console.log(err),
         () => {
           getDownloadURL(uploadTask.snapshot.ref).then(async (downloadUrl) => {
             await updateProfile(result.user, {
-              displayName: storageRef,
-              photoURL: downloadUrl,
-            });
-            await setDoc(doc(db, "users", result.user.uid), {
-              uid: result.user.uid,
+              displayName: data.displayName,
+              photoURL: downloadUrl
+            })
+            await setDoc(doc(db, 'users', result.user.uid), {
+              id: result.user.uid,
               displayName: data.displayName,
               email: data.email,
-              avatar: downloadUrl,
-            });
-          });
-        },
-      );
-      console.log(result.user);
+              photoURL: downloadUrl
+            })
+          })
+        }
+      )
+      console.log(result)
     } catch (err) {
       console.log(err);
     }
@@ -51,6 +52,7 @@ const initialState: IAuthState = {
 const AuthSlice = createSlice({
   name: "authetication",
   initialState,
+  reducers: {}
 });
 
 export default AuthSlice.reducer;

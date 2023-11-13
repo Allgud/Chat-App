@@ -1,15 +1,16 @@
-import { SyntheticEvent, useState } from "react";
+import { ChangeEvent, SyntheticEvent, useState } from "react";
 
 export const useAuthForm = () => {
-  const [name, setName] = useState("");
+  const [displayName, setDisplayName] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const [avatar, setAvatar] = useState<Blob>()
 
   const handleChange = (evt: SyntheticEvent) => {
     const target = evt.target as HTMLInputElement;
     switch (target.name) {
       case "display-name":
-        setName(target.value);
+        setDisplayName(target.value);
         break;
       case "email":
         setEmail(target.value);
@@ -19,15 +20,26 @@ export const useAuthForm = () => {
         break;
       default:
         setEmail("");
-        setName("");
+        setDisplayName("");
         setPassword("");
     }
   };
 
+  const addAvatar = (evt: ChangeEvent) => {
+    const target = evt.target as HTMLInputElement
+    if (target.files) {
+      const file = target.files[0]
+      setAvatar(file)
+    }
+    
+  }
+
   return {
-    name,
+    displayName,
     email,
     password,
     handleChange,
+    addAvatar,
+    avatar
   };
 };
