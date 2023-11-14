@@ -28,5 +28,5 @@ export type UserProps = {
   displayName?: string;
   email: string;
   password: string;
-  avatar?: Blob;
+  avatar: Blob;
 };
