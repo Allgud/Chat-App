@@ -1,10 +1,10 @@
-import AuthScreen from "../../screens/AuthScreen/index";
+import AppRouter from "../../router/AppRouter";
 import styles from "./app.module.css";
 
 const App = () => {
   return (
     <div className={styles.app__wrapper}>
-      <AuthScreen />
+      <AppRouter />
     </div>
   );
 };
