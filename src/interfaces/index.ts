@@ -36,3 +36,10 @@ export type UserProps = {
   password: string;
   avatar: Blob;
 };
+
+export interface IUser {
+  displayName: string,
+  email: string,
+  id: string,
+  photoUrl: string
+}

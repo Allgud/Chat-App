@@ -3,7 +3,7 @@ import { useAuthForm } from "../../hooks/useAuthForm";
 import { AuthFormProps } from "../../interfaces";
 import { MdOutlineAddPhotoAlternate } from "react-icons/md";
 import { Modes } from "../../constants";
-import { createUser } from "../../store/slices/authSlice";
+import { createUser, signIn } from "../../store/slices/authSlice";
 import { useAppDispatch } from "../../store/hooks/index";
 import { SyntheticEvent } from "react";
 
@@ -13,14 +13,22 @@ const AuthForm = ({ mode, handleMode }: AuthFormProps) => {
 
   const handleSubmit = (evt: SyntheticEvent) => {
     evt.preventDefault();
-    dispatch(createUser({ displayName, email, password, avatar }));
+    if (mode === Modes.SIGNUP) {
+      dispatch(createUser({ displayName, email, password, avatar }));
+      return
+    }
+
+    if (mode === Modes.LOGIN) {
+      dispatch(signIn({ email, password }))
+      return
+    }
   };
 
   return (
     <div className={styles.form__wrapper}>
       <h3 className={styles.form__title}>Chat App</h3>
       <h6 className={styles.form__mode}>
-        {mode === "login" ? "Вход" : "Регистрация"}
+        {mode === Modes.LOGIN ? "Вход" : "Регистрация"}
       </h6>
       <form className={styles.form__form} onSubmit={(evt) => handleSubmit(evt)}>
         {mode !== Modes.LOGIN && (
