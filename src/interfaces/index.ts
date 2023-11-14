@@ -1,3 +1,5 @@
+import { ReactNode } from "react";
+
 export type AuthFormProps = {
   mode: string;
   handleMode: (arg1: string) => void;
@@ -18,6 +20,10 @@ export type ChatProps = {
   avatar?: string;
   username: string;
   messages?: string[];
+};
+
+export type RouteProps = {
+  children: ReactNode;
 };
 
 export type MessageProps = {
