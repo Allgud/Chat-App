@@ -2,7 +2,7 @@ import { createSlice } from "@reduxjs/toolkit";
 import { createUser, signIn } from "./authSlice";
 
 interface ICommonState {
-  loading: false;
+  loading: boolean;
   error: string | unknown;
 }
 

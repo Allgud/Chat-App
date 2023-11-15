@@ -20,6 +20,9 @@ const userSlice = createSlice({
       localStorage.setItem("email", action.payload.email);
       state.user = action.payload;
     },
+    removeUser: (state) => {
+      state.user = null
+    },
     handleIsUser: (state) => {
       if (localStorage.getItem("userId")) {
         state.isUser = true;
@@ -30,5 +33,5 @@ const userSlice = createSlice({
   },
 });
 
-export const { setUser, handleIsUser } = userSlice.actions;
+export const { setUser, handleIsUser, removeUser } = userSlice.actions;
 export default userSlice.reducer;

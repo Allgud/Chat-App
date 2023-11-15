@@ -3,6 +3,7 @@ import {
   createUserWithEmailAndPassword,
   updateProfile,
   signInWithEmailAndPassword,
+  signOut
 } from "firebase/auth";
 import { auth, storage, db } from "../../firebase";
 import { UserProps } from "../../interfaces";
@@ -14,7 +15,7 @@ import {
 } from "firebase/storage";
 import { doc, setDoc } from "firebase/firestore";
 import { FirebaseError } from "@firebase/util";
-import { setUser } from "./userSlice";
+import { setUser, removeUser } from "./userSlice";
 
 interface IAuthState {
   isAuth: boolean;
@@ -22,7 +23,7 @@ interface IAuthState {
 
 export const createUser = createAsyncThunk(
   "auth/createUser",
-  async (data: UserProps) => {
+  async (data: UserProps, {dispatch}) => {
     try {
       const result = await createUserWithEmailAndPassword(
         auth,
@@ -47,9 +48,12 @@ export const createUser = createAsyncThunk(
               email: data.email,
               photoURL: downloadUrl,
             });
+            await setDoc(doc(db, 'userChats', result.user.uid), {})
           });
         },
       );
+      const { displayName, uid, email, photoURL } = result.user;
+      dispatch(setUser({ displayName, id: uid, email, photoUrl: photoURL }));
     } catch (err: unknown) {
       if (err instanceof FirebaseError) {
         throw Error(err.message);
@@ -68,7 +72,7 @@ export const signIn = createAsyncThunk(
         data.password,
       );
       const { displayName, uid, email, photoURL } = result.user;
-      dispatch(setUser({ displayName, id: uid, email, photoURL }));
+      dispatch(setUser({ displayName, id: uid, email, photoUrl: photoURL }));
     } catch (err: unknown) {
       if (err instanceof FirebaseError) {
         throw Error(err.message);
@@ -77,8 +81,16 @@ export const signIn = createAsyncThunk(
   },
 );
 
+export const logout = createAsyncThunk(
+  'auth/logout',
+  async(_, {dispatch}) => {
+    await signOut(auth)
+    dispatch(removeUser())
+  }
+)
+
 const initialState: IAuthState = {
-  isAuth: false,
+  isAuth: true,
 };
 
 const authSlice = createSlice({
@@ -92,7 +104,10 @@ const authSlice = createSlice({
       })
       .addCase(signIn.fulfilled, (state) => {
         state.isAuth = true;
-      });
+      })
+      .addCase(logout.fulfilled, (state) => {
+        state.isAuth = false
+      })
   },
 });
 

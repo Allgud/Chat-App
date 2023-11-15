@@ -8,6 +8,7 @@ export type AuthFormProps = {
 export type SearchProps = {
   value: string;
   onChange: (arg1: string) => void;
+  onSubmit: (arg1: string) => void
 };
 
 export type ContactProps = {
@@ -47,3 +48,8 @@ export interface IUser {
 export type LoaderProps = {
   isVisible: boolean;
 };
+
+export type SidebarNavProps = {
+  displayName: string,
+  imgUrl: string,
+}
