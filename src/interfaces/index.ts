@@ -38,8 +38,12 @@ export type UserProps = {
 };
 
 export interface IUser {
-  displayName: string,
-  email: string,
-  id: string,
-  photoUrl: string
+  displayName: string;
+  email: string;
+  id: string;
+  photoUrl: string;
 }
+
+export type LoaderProps = {
+  isVisible: boolean;
+};

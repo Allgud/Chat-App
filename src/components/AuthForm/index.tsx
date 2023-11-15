@@ -8,19 +8,20 @@ import { useAppDispatch } from "../../store/hooks/index";
 import { SyntheticEvent } from "react";
 
 const AuthForm = ({ mode, handleMode }: AuthFormProps) => {
-  const { displayName, email, password, handleChange, avatar, addAvatar } = useAuthForm();
+  const { displayName, email, password, handleChange, avatar, addAvatar } =
+    useAuthForm();
   const dispatch = useAppDispatch();
 
   const handleSubmit = (evt: SyntheticEvent) => {
     evt.preventDefault();
     if (mode === Modes.SIGNUP) {
       dispatch(createUser({ displayName, email, password, avatar }));
-      return
+      return;
     }
 
     if (mode === Modes.LOGIN) {
-      dispatch(signIn({ email, password }))
-      return
+      dispatch(signIn({ email, password }));
+      return;
     }
   };
 
