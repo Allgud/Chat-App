@@ -3,7 +3,7 @@ import {
   createUserWithEmailAndPassword,
   updateProfile,
   signInWithEmailAndPassword,
-  signOut
+  signOut,
 } from "firebase/auth";
 import { auth, storage, db } from "../../firebase";
 import { UserProps } from "../../interfaces";
@@ -23,7 +23,7 @@ interface IAuthState {
 
 export const createUser = createAsyncThunk(
   "auth/createUser",
-  async (data: UserProps, {dispatch}) => {
+  async (data: UserProps, { dispatch }) => {
     try {
       const result = await createUserWithEmailAndPassword(
         auth,
@@ -48,12 +48,12 @@ export const createUser = createAsyncThunk(
               email: data.email,
               photoURL: downloadUrl,
             });
-            await setDoc(doc(db, 'userChats', result.user.uid), {})
+            await setDoc(doc(db, "userChats", result.user.uid), {});
           });
         },
       );
       const { displayName, uid, email, photoURL } = result.user;
-      dispatch(setUser({ displayName, id: uid, email, photoUrl: photoURL }));
+      dispatch(setUser({ displayName, id: uid, email, photoURL }));
     } catch (err: unknown) {
       if (err instanceof FirebaseError) {
         throw Error(err.message);
@@ -72,7 +72,7 @@ export const signIn = createAsyncThunk(
         data.password,
       );
       const { displayName, uid, email, photoURL } = result.user;
-      dispatch(setUser({ displayName, id: uid, email, photoUrl: photoURL }));
+      dispatch(setUser({ displayName, id: uid, email, photoURL }));
     } catch (err: unknown) {
       if (err instanceof FirebaseError) {
         throw Error(err.message);
@@ -82,12 +82,12 @@ export const signIn = createAsyncThunk(
 );
 
 export const logout = createAsyncThunk(
-  'auth/logout',
-  async(_, {dispatch}) => {
-    await signOut(auth)
-    dispatch(removeUser())
-  }
-)
+  "auth/logout",
+  async (_, { dispatch }) => {
+    await signOut(auth);
+    dispatch(removeUser());
+  },
+);
 
 const initialState: IAuthState = {
   isAuth: true,
@@ -106,8 +106,8 @@ const authSlice = createSlice({
         state.isAuth = true;
       })
       .addCase(logout.fulfilled, (state) => {
-        state.isAuth = false
-      })
+        state.isAuth = false;
+      });
   },
 });
 

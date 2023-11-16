@@ -8,7 +8,8 @@ export type AuthFormProps = {
 export type SearchProps = {
   value: string;
   onChange: (arg1: string) => void;
-  onSubmit: (arg1: string) => void
+  onSubmit: (arg1: string) => void;
+  onClear: () => void;
 };
 
 export type ContactProps = {
@@ -42,7 +43,7 @@ export interface IUser {
   displayName: string;
   email: string;
   id: string;
-  photoUrl: string;
+  photoURL: string;
 }
 
 export type LoaderProps = {
@@ -50,6 +51,6 @@ export type LoaderProps = {
 };
 
 export type SidebarNavProps = {
-  displayName: string,
-  imgUrl: string,
-}
+  displayName: string;
+  imgUrl: string;
+};

@@ -1,25 +1,30 @@
 import { useState } from "react";
 import { useAppDispatch } from "../store/hooks";
-import { getSearchUser } from "../store/slices/chatSlice";
+import { getSearchUser, cleanSearchedFlag } from "../store/slices/chatSlice";
 
 export const useSearch = () => {
-  const [searchValue, setSearchValue] = useState('')
-  const dispatch = useAppDispatch()
+  const [searchValue, setSearchValue] = useState("");
+  const dispatch = useAppDispatch();
 
   const handleChange = (text: string) => {
-    setSearchValue(text)
-  }
+    dispatch(cleanSearchedFlag());
+    setSearchValue(text);
+  };
+
+  const clearSearch = () => {
+    setSearchValue("");
+  };
 
   const handleSubmit = (code: string) => {
     if (code === "Enter" || code === "NumpadEnter") {
-      dispatch(getSearchUser({ text: searchValue }))
+      dispatch(getSearchUser({ text: searchValue }));
     }
-    
-  }
+  };
 
   return {
     searchValue,
     handleChange,
-    handleSubmit
-  }
-}
+    handleSubmit,
+    clearSearch,
+  };
+};
