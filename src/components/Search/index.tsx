@@ -2,16 +2,19 @@ import { SearchProps } from "../../interfaces";
 import { AiOutlineClose } from "react-icons/ai";
 import styles from "./search.module.css";
 import Contact from "../Contact/index";
-import { useAppSelector } from "../../store/hooks/index";
-import { useAppDispatch } from "../../store/hooks/index";
-import { clearSearchList } from "../../store/slices/chatSlice";
+import { useAppSelector, useAppDispatch } from "../../store/hooks/index";
 import { Oval } from "react-loader-spinner";
+import { getCurrentChat } from '../../store/slices/chatSlice'
 
 const Search = ({ value, onChange, onSubmit, onClear }: SearchProps) => {
   const { searchUsers, onLoad, areUsersSearched } = useAppSelector(
     (state) => state.chat,
   );
-  const dispatch = useAppDispatch();
+  const dispatch = useAppDispatch()
+  const hadleSelected = (data: { [key: string]: string }) => {
+    onClear()
+    dispatch(getCurrentChat(data))
+  }
 
   return (
     <div className={styles.search__wrapper}>
@@ -44,23 +47,22 @@ const Search = ({ value, onChange, onSubmit, onClear }: SearchProps) => {
           onClick={() => onClear()}
         />
       )}
-      {areUsersSearched && (
-        <>
-          {searchUsers.length === 0 ? (
-            <div className={styles.search__empty}>Пользователей не найдено</div>
-          ) : (
-            <ul
-              className={styles.search__list}
-              onClick={() => dispatch(clearSearchList())}
-            >
-              {searchUsers.map((user) => (
-                <Contact username={user.displayName} avatar={user.photoURL} />
-              ))}
-            </ul>
-          )}
-        </>
-      )}
-    </div>
+      {
+        areUsersSearched &&
+        <ul className={styles.search__list}>
+          {!searchUsers ? <div className={styles.search__empty}>Пользователей не найдено</div> : searchUsers.map((user) => (
+            <Contact
+              username={user.displayName}
+              avatar={user.photoURL}
+              lastMessage=""
+              userId={user.id}
+              key={user.id}
+              onClick={hadleSelected}
+            />
+          ))}
+        </ul>
+      }
+    </div >
   );
 };
 

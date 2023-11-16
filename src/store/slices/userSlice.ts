@@ -1,8 +1,8 @@
 import { createSlice } from "@reduxjs/toolkit";
-import { IUser } from "../../interfaces";
+import { DocumentData } from "firebase/firestore";
 
 interface IUserState {
-  user: IUser | null;
+  user: DocumentData | null;
   isUser: boolean;
 }
 

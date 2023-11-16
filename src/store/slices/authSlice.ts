@@ -43,7 +43,7 @@ export const createUser = createAsyncThunk(
               photoURL: downloadUrl,
             });
             await setDoc(doc(db, "users", result.user.uid), {
-              id: result.user.uid,
+              uid: result.user.uid,
               displayName: data.displayName,
               email: data.email,
               photoURL: downloadUrl,
@@ -52,8 +52,8 @@ export const createUser = createAsyncThunk(
           });
         },
       );
-      const { displayName, uid, email, photoURL } = result.user;
-      dispatch(setUser({ displayName, id: uid, email, photoURL }));
+
+      dispatch(setUser(result.user));
     } catch (err: unknown) {
       if (err instanceof FirebaseError) {
         throw Error(err.message);

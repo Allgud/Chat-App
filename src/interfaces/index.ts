@@ -13,9 +13,11 @@ export type SearchProps = {
 };
 
 export type ContactProps = {
-  avatar?: string;
+  avatar: string;
   username: string;
-  lastMessage: string;
+  lastMessage?: string;
+  userId: string;
+  onClick: (args: {[key: string]: string}) => void
 };
 
 export type ChatProps = {
@@ -39,13 +41,6 @@ export type UserProps = {
   avatar: Blob;
 };
 
-export interface IUser {
-  displayName: string;
-  email: string;
-  id: string;
-  photoURL: string;
-}
-
 export type LoaderProps = {
   isVisible: boolean;
 };
@@ -54,3 +49,9 @@ export type SidebarNavProps = {
   displayName: string;
   imgUrl: string;
 };
+
+export interface ICurrentChat {
+  chatId: string,
+  timestamp: { [key: string]: number },
+  userInfo: { [key: string]: string },
+}

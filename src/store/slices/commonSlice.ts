@@ -1,5 +1,6 @@
 import { createSlice } from "@reduxjs/toolkit";
 import { createUser, signIn } from "./authSlice";
+import { getCurrentChat } from './chatSlice'
 
 interface ICommonState {
   loading: boolean;
@@ -36,7 +37,17 @@ const commonSlice = createSlice({
       .addCase(signIn.rejected, (state, action) => {
         state.loading = false;
         state.error = action.payload;
-      });
+      })
+      .addCase(getCurrentChat.pending, (state) => {
+        state.loading = true
+      })
+      .addCase(getCurrentChat.fulfilled, state => {
+        state.loading = false
+      })
+      .addCase(getCurrentChat.rejected, (state, action) => {
+        state.loading = false
+        state.error = action.payload
+      })
   },
 });
 
